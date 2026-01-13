@@ -1,0 +1,7 @@
+
+/* Constrain Blowfish list cards (home / section pages) */
+article.article-link--simple {
+  max-width: 80rem;          /* ~1280px, adjust to taste */
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,90 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+<link
+  rel="stylesheet"
+  href="/css/justifiedGallery.min.css">
+
+<style>
+/* =========================================================
+   1) SINGLE POSTS — wide content & galleries
+   ========================================================= */
+.article-content,
+.article-content.max-w-prose,
+.article-content .max-w-prose,
+.article-content .max-w-fit {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+
+/* =========================================================
+   2) HOME HERO — larger, more prominent
+   ========================================================= */
+#main-content > article:first-of-type {
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+#main-content > article:first-of-type img.h-36.w-36 {
+  width: 11rem;
+  height: 11rem;
+}
+
+#main-content > article:first-of-type h1 {
+  font-size: 3.25rem;
+  line-height: 1.05;
+}
+
+#main-content > article:first-of-type h2 {
+  font-size: 1.5rem;
+}
+
+
+/* =========================================================
+   3) HOME "RECENT" — masonry photo grid
+   ========================================================= */
+
+/* Masonry container */
+@media (min-width: 768px) {
+  #main-content section.space-y-10.w-full {
+    column-count: 2;
+    column-gap: 1.25rem;
+  }
+
+  /* Remove Tailwind space-y effect for masonry */
+  #main-content section.space-y-10.w-full
+    > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+
+  /* Masonry cards */
+  #main-content section.space-y-10.w-full
+    > article.article-link--simple {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+  }
+
+  /* Tile-style cards */
+  #main-content section.space-y-10.w-full
+    article.article-link--simple {
+    flex-direction: column !important;
+  }
+
+  #main-content section.space-y-10.w-full
+    article.article-link--simple .thumbnail {
+    width: 100% !important;
+    height: 14rem;
+  }
+}
+
+/* 3 columns on wide screens */
+@media (min-width: 1280px) {
+  #main-content section.space-y-10.w-full {
+    column-count: 3;
+  }
+}
+</style>
