@@ -1,24 +1,21 @@
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Blowfish"
+title = "blog.willprogramforfood.com"
 
 [params]
   displayName = "English"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-  logo = "img/blackhole3.png"
-#  description = "A powerful, lightweight theme for Hugo."
-  description = "Ramblings"
+  logo = "img/logo.jpg"
+  description = "Hippo Adventures"
 
 [params.author]
   name = "Sam Jackson"
   email = "hipposareevil@protonmail.com"
   image = "img/blackhole.png"
   imageQuality = 96
-  headline = "Ramblings"
-  bio = "Hippo Bit"
-  links = [
-     { tumblr = "https://hipposareevil.tumblr.com" },
-  ]
+  headline = "Hippo Adventures"
+#  bio = "Hippo Bit"
+

@@ -12,13 +12,8 @@
 
 [[main]]
   name = "Blog"
-  pageRef = "/blog"
-  weight = 10
-
-[[main]]
-  name = "Parent"
-  weight = 20
   pageRef = "/"
+  weight = 10
 
 
 [[main]]
@@ -26,22 +21,28 @@
   pageRef = "/about"
   weight = 20
 
+[[main]]
+  name = "Categories"
+  pageRef = "categories"
+  weight = 22
+
+[[main]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 25
+
+
+[[main]]
+  name = "Parent"
+  weight = 30
+  pageRef = "/"
+
 
 [[main]]
   name = "example sub-menu 1"
   parent = "Parent"
   pageRef = "posts"
   weight = 20
-
-[[main]]
-  name = "Categories"
-  pageRef = "categories"
-  weight = 20
-
-[[main]]
-  name = "Tags"
-  pageRef = "tags"
-  weight = 30
 
 
 

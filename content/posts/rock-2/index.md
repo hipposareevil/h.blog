@@ -1,11 +1,11 @@
 ---
-title: "My Trip"
+title: "Test Trip here"
 date: 2025-01-13
 draft: false
 tags: ["climb"]
 ---
+Test trip
 
-Some intro text about the trip goes here. Some intro text about the trip goes here. Some intro text about the trip goes here. Some intro text about the trip goes here. Some intro text about the trip goes here.
 
 ## Photos
 

@@ -87,4 +87,30 @@
     column-count: 3;
   }
 }
+
+/* Ensure the post content area does NOT shrink to text width */
+.article-content {
+  width: 100% !important;
+}
+
+.article-content .justified-gallery,
+.article-content #gallery {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+}
+
+/* If any wrapper is shrink-wrapping (common in Blowfish), neutralize it */
+.article-content .max-w-fit,
+.article-content [class*="max-w-fit"] {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Bonus: prevent any accidental inline shrink */
+.article-content > * {
+  max-width: none;
+}
+
+
 </style>
