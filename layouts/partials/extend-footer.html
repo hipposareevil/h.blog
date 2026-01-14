@@ -12,7 +12,7 @@
     const $g = $(".justified-gallery");
     if (!$g.length) return;
 
-    // If it was already initialized, reset it
+    // Re-init safely if needed
     if ($g.data("jg.initialized")) {
       $g.justifiedGallery("destroy");
     }
@@ -26,29 +26,14 @@
 
   window.addEventListener("load", function () {
     initGallery();
-    GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true });
+
+    // Lightbox only if there are any matching links
+    if (document.querySelector(".glightbox")) {
+      GLightbox({ selector: ".glightbox", touchNavigation: true, loop: true });
+    }
   });
 
   window.addEventListener("resize", function () {
     initGallery();
   });
 </script>
-
-
-<style>
-/* Only apply on pages that actually have a post body */
-main:has(.article-content) .max-w-fit,
-main:has(.article-content) .min-w-0.min-h-0.max-w-fit {
-  max-width: none !important;
-  width: 100% !important;
-}
-
-/* Make sure the gallery itself is full width */
-main:has(.article-content) .article-content,
-main:has(.article-content) .article-content .justified-gallery,
-main:has(.article-content) .article-content #gallery {
-  max-width: none !important;
-  width: 100% !important;
-  display: block !important;
-}
-</style>
