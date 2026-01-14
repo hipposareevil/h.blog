@@ -7,6 +7,8 @@ baseURL = "http://blog.willprogramforfood.com"
 defaultContentLanguage = "en"
 disableLanguages = [] #to allow translation work requiring shipping to production
 
+ignoreLogs = ['warning-goldmark-raw-html']
+
 [module]
   [[module.imports]]
     path = "github.com/nunocoracao/blowfish/v2"

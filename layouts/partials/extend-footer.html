@@ -51,3 +51,61 @@
     }
   });
 </script>
+
+
+<!-- scroll main page -->
+<script>
+(function () {
+  let nextPage = 2;
+  let loading = false;
+  let done = false;
+
+  async function loadNextPage() {
+    if (loading || done) return;
+    loading = true;
+
+    const url = `/page/${nextPage}/`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        done = true;
+        return;
+      }
+
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      const newPosts = doc.querySelectorAll("article.article-link--simple");
+      if (!newPosts.length) {
+        done = true;
+        return;
+      }
+
+      const container = document.getElementById("post-list");
+
+if (!container) {
+console.warn("Infinite scroll: post-list container not found");
+done = true;
+return;
+}
+
+      newPosts.forEach(el => container.appendChild(el));
+
+      nextPage++;
+      loading = false;
+    } catch (e) {
+      console.error("Infinite scroll failed:", e);
+      loading = false;
+    }
+  }
+
+  window.addEventListener("scroll", () => {
+    if (done) return;
+    const scrollBottom = window.innerHeight + window.scrollY;
+    const threshold = document.body.offsetHeight - 800;
+    if (scrollBottom >= threshold) {
+      loadNextPage();
+    }
+  });
+})();
+</script>

@@ -1,8 +1,12 @@
 /* =========================================================
-   POSTS — FULL WIDTH + FIX SHRINK-TO-FIT
+   SINGLE POSTS — FULL WIDTH CONTENT + GALLERY FIXES
    ========================================================= */
 
-/* Make post content truly full width */
+/*
+  Blowfish sometimes wraps post content in `max-w-fit`
+  (fit-content), which causes galleries to shrink if the
+  text above is short. These rules force true full width.
+*/
 .article-content,
 .article-content.max-w-prose,
 .article-content .max-w-prose,
@@ -11,18 +15,16 @@
   width: 100% !important;
 }
 
-/* Critical fix:
-   Blowfish sometimes wraps posts in max-w-fit (fit-content),
-   which caused galleries to shrink when text was short */
+/* Extra safety for nested wrappers used by Blowfish */
 main:has(.article-content) .max-w-fit,
 main:has(.article-content) .min-w-0.min-h-0.max-w-fit {
   max-width: none !important;
   width: 100% !important;
 }
 
-/* Ensure galleries always measure full width */
-main:has(.article-content) .article-content .justified-gallery,
-main:has(.article-content) .article-content #gallery {
+/* Ensure photo galleries always measure full container width */
+main:has(.article-content) .justified-gallery,
+main:has(.article-content) #gallery {
   width: 100% !important;
   max-width: none !important;
   display: block !important;
@@ -30,22 +32,25 @@ main:has(.article-content) .article-content #gallery {
 
 
 /* =========================================================
-   HOME HERO — BIGGER, STRONGER
+   HOME HERO — LARGER, MORE PROMINENT INTRO
    ========================================================= */
 
-/* First article in main = hero */
+/*
+  The first <article> on the home page is the Blowfish
+  profile / hero block.
+*/
 #main-content > article:first-of-type {
   padding-top: 1.5rem;
   padding-bottom: 2.5rem;
 }
 
-/* Bigger avatar */
+/* Larger avatar */
 #main-content > article:first-of-type img.h-36.w-36 {
   width: 11rem;
   height: 11rem;
 }
 
-/* Bigger title + subtitle */
+/* Stronger title + subtitle */
 #main-content > article:first-of-type h1 {
   font-size: 3.25rem;
   line-height: 1.05;
@@ -57,13 +62,160 @@ main:has(.article-content) .article-content #gallery {
 
 
 /* =========================================================
-   HOME "RECENT" — MASONRY LAYOUT
+   HOME PAGE — RECENT POSTS (CHRONOLOGICAL GRID)
    ========================================================= */
 
-/* Mobile: normal vertical list */
-@media (min-width: 768px) {
+/*
+  IMPORTANT:
+  We intentionally do NOT use masonry or CSS columns here.
+  Infinite scroll + masonry breaks chronological order.
 
-  /* Masonry container */
-  #main-content section.space-y-10.w-full {
-    column-count: 2;
-    column-gap: 1.25rem;
+  This grid flows LEFT → RIGHT → NEXT ROW
+  and preserves correct date order at all times.
+*/
+#post-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-auto-flow: row !important;
+
+  /* Kill any leftover masonry / column behavior */
+  column-count: unset !important;
+  columns: unset !important;
+}
+
+/* Mobile: single column */
+@media (max-width: 767px) {
+  #post-list {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Hide default Hugo pagination UI (infinite scroll replaces it) */
+.pagination,
+nav.pagination {
+  display: none;
+}
+
+
+/* =========================================================
+   CATEGORIES — SQUARISH BADGES + ACCENT COLORS + TOOLTIPS
+   ========================================================= */
+
+/*
+  Categories are structural and primary.
+  We give them:
+  - squarish badge shape
+  - accent color per category
+  - icon
+  - hover tooltip (CSS only)
+*/
+
+.article-taxonomies a[href^="/categories/"],
+.taxonomies a[href^="/categories/"] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.375rem; /* squarish, not pill */
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  border: 1px solid currentColor;
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+/* Tooltip using title attribute */
+.article-taxonomies a[href^="/categories/"]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 125%;
+  left: 0;
+
+  white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 500;
+
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* =====================
+   Category icons + colors
+   ===================== */
+
+/* Travel */
+a[href^="/categories/travel/"] {
+  color: #0ea5e9; /* sky-500 */
+}
+
+
+/* Climb */
+a[href^="/categories/climb/"] {
+  color: #f97316; /* orange-500 */
+}
+
+/* Dive */
+a[href^="/categories/dive/"] {
+  color: #06b6d4; /* cyan-500 */
+}
+
+/* Bike */
+a[href^="/categories/bike/"] {
+  color: #22c55e; /* green-500 */
+}
+
+/* Ski */
+a[href^="/categories/ski/"] {
+  color: #6366f1; /* indigo-500 */
+}
+
+
+/* =========================================================
+   TAGS — LIGHTWEIGHT, SECONDARY METADATA
+   ========================================================= */
+
+/*
+  Tags are descriptive and many.
+  Keep them quiet so they don’t compete with categories.
+*/
+.article-taxonomies a[href^="/tags/"],
+.taxonomies a[href^="/tags/"] {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.25rem;
+
+  border: 1px dashed rgba(115, 115, 115, 0.5);
+  background-color: transparent;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   INFINITE SCROLL — LOAD MORE BUTTON SUPPORT
+   ========================================================= */
+
+/*
+  Ensures the "Load more" button spans full grid width
+  and doesn’t get trapped in a column.
+*/
+#load-more-wrapper {
+  grid-column: 1 / -1;
+}

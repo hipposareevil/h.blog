@@ -1,3 +1,3 @@
----
-title: "Trips"
----
+cascade = [
+  { type = "posts", section = "posts" }
+]
