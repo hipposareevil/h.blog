@@ -37,3 +37,17 @@
     initGallery();
   });
 </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+
+    const details = document.getElementById(hash);
+    if (details && details.tagName === "DETAILS") {
+      details.open = true;
+      details.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  });
+</script>

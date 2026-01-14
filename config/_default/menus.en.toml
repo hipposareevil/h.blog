@@ -33,8 +33,18 @@
 
 
 [[main]]
+  name = "Archives"
+  pageRef = "/archives"
+  weight = 28
+
+[[main]]
+  name = "Browse"
+  pageRef = "/browse"
+  weight = 29
+
+[[main]]
   name = "Parent"
-  weight = 30
+  weight = 40
   pageRef = "/"
 
 

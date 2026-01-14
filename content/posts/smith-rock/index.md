@@ -1,8 +1,8 @@
 ---
 title: "My Trip"
-date: 2025-01-13
+date: 2024-12-13
 draft: false
-tags: ["climb"]
+tags: ["climb", "moab"]
 ---
 
 Some intro text about the trip goes here. Some intro text about the trip goes here. Some intro text about the trip goes here. Some intro text about the trip goes here. Some intro text about the trip goes here.
