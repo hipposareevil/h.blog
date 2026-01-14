@@ -1,8 +1,8 @@
 /* =========================================================
-   POSTS: full-width content + fix "shrink-to-fit" wrappers
+   POSTS — FULL WIDTH + FIX SHRINK-TO-FIT
    ========================================================= */
 
-/* Make post content use the available width */
+/* Make post content truly full width */
 .article-content,
 .article-content.max-w-prose,
 .article-content .max-w-prose,
@@ -11,15 +11,16 @@
   width: 100% !important;
 }
 
-/* Critical: prevent "fit-content" wrappers from shrinking the post width
-   This is what caused the gallery to become narrow when text was short. */
+/* Critical fix:
+   Blowfish sometimes wraps posts in max-w-fit (fit-content),
+   which caused galleries to shrink when text was short */
 main:has(.article-content) .max-w-fit,
 main:has(.article-content) .min-w-0.min-h-0.max-w-fit {
   max-width: none !important;
   width: 100% !important;
 }
 
-/* Ensure the gallery itself always measures full width */
+/* Ensure galleries always measure full width */
 main:has(.article-content) .article-content .justified-gallery,
 main:has(.article-content) .article-content #gallery {
   width: 100% !important;
@@ -29,20 +30,22 @@ main:has(.article-content) .article-content #gallery {
 
 
 /* =========================================================
-   HOME HERO: bigger avatar + typography
-   (Targets the first <article> inside #main-content)
+   HOME HERO — BIGGER, STRONGER
    ========================================================= */
 
+/* First article in main = hero */
 #main-content > article:first-of-type {
   padding-top: 1.5rem;
   padding-bottom: 2.5rem;
 }
 
+/* Bigger avatar */
 #main-content > article:first-of-type img.h-36.w-36 {
   width: 11rem;
   height: 11rem;
 }
 
+/* Bigger title + subtitle */
 #main-content > article:first-of-type h1 {
   font-size: 3.25rem;
   line-height: 1.05;
@@ -54,50 +57,13 @@ main:has(.article-content) .article-content #gallery {
 
 
 /* =========================================================
-   HOME "RECENT": masonry layout (CSS columns)
-   Your HTML shows cards inside: section.space-y-10.w-full
+   HOME "RECENT" — MASONRY LAYOUT
    ========================================================= */
 
-/* Mobile: keep normal vertical list. Masonry kicks in at md+. */
+/* Mobile: normal vertical list */
 @media (min-width: 768px) {
+
   /* Masonry container */
   #main-content section.space-y-10.w-full {
     column-count: 2;
     column-gap: 1.25rem;
-  }
-
-  /* Remove Tailwind space-y effect inside the masonry container */
-  #main-content section.space-y-10.w-full > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 0 !important;
-  }
-
-  /* Cards become masonry bricks */
-  #main-content section.space-y-10.w-full > article.article-link--simple {
-    display: inline-block;
-    width: 100%;
-    margin: 0 0 1.25rem 0 !important;
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-  }
-
-  /* Tile-style cards work better for masonry than side-by-side layout */
-  #main-content section.space-y-10.w-full article.article-link--simple {
-    flex-direction: column !important;
-  }
-
-  /* Tile thumbnail */
-  #main-content section.space-y-10.w-full article.article-link--simple .thumbnail {
-    width: 100% !important;
-    height: 14rem;
-    flex: 0 0 auto;
-  }
-}
-
-/* Wider screens: 3 columns */
-@media (min-width: 1280px) {
-  #main-content section.space-y-10.w-full {
-    column-count: 3;
-  }
-}
-
-
